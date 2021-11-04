@@ -5,20 +5,20 @@ const express = require("express"),
   path = require("path");
 
 // Import routes
-// let routes = require("./routes");
+let routes = require("./routes");
 
 // Configure .env file
 require("dotenv").config();
 
 // Connecting to database
-// require("./models/connect")();
+require("./models/connect")();
 
 // Middleware function
 app.use(cors());
 app.use(express.json());
 
 // Routes
-// app.use("/api", routes);
+app.use("/api", routes);
 
 if (
   process.env.NODE_ENV === "production" ||
