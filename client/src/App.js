@@ -1,21 +1,35 @@
 import "./App.css";
+import "./components/style.css";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import Profile from "./Profile";
+import Main from "./components/Main";
+import NavBar from "./components/NavBar";
 
 function App() {
   const { logout, loginWithRedirect } = useAuth0();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={loginWithRedirect}>Sign-In</button>
-        <button onClick={() => logout({ returnTo: window.location.origin })}>
-          Logout
-        </button>
-        <Profile />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route path="/doc">
+            <Main />
+          </Route>
+          <Route path="/">
+            <header className="App-header">
+              <button onClick={loginWithRedirect}>Sign-In</button>
+              <button
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                Logout
+              </button>
+            </header>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

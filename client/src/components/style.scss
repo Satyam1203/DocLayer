@@ -1,0 +1,35 @@
+.navigation-bar {
+  display: flex;
+  background-color: bisque;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+  /* position: fixed;
+  width: 100%;
+  top: 0; */
+
+  nav {
+    display: flex;
+  }
+}
+
+.main-container {
+  display: flex;
+
+  .controls {
+    flex: 1;
+  }
+
+  .doc {
+    width: 60vw;
+    height: calc(60vw * 1.4142);
+    overflow-y: scroll;
+    aspect-ratio: 1/1.4142;
+    background-color: #fff;
+    box-shadow: 1px 2px 2px 3px grey;
+    margin: 4px;
+    padding: 16px;
+    outline: none;
+    text-align: left;
+  }
+}
