@@ -6,6 +6,10 @@ let documentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    fileName: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       required: true,
