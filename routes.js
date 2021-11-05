@@ -19,10 +19,14 @@ router.route("/save").post(async (req, res) => {
       if (document) {
         res.json({
           success: true,
+          message: "File saved",
           document,
         });
       } else {
-        res.json({ success: false });
+        res.json({
+          success: false,
+          message: "Unable to save. Please try again.",
+        });
       }
     }
   } catch (e) {
@@ -78,6 +82,7 @@ router.route("/update").post(async (req, res) => {
     if (updated.modifiedCount) {
       res.json({
         success: true,
+        message: "File Updated",
       });
     } else {
       res.json({ success: false });
@@ -97,9 +102,13 @@ router.route("/remove").post(async (req, res) => {
     if (updated.modifiedCount) {
       res.json({
         success: true,
+        message: "File deleted",
       });
     } else {
-      res.json({ success: false });
+      res.json({
+        success: false,
+        message: "Could not find this document. Please try again.",
+      });
     }
   } catch (e) {
     res.json({ error: e.message });

@@ -6,7 +6,7 @@ import { Redirect, useParams } from "react-router-dom";
 import Controls from "./Controls";
 import Doc from "./Doc";
 
-function Main() {
+function Main({ newFile = false }) {
   const { isAuthenticated } = useAuth0();
   const { file } = useParams();
   const docRef = useRef(null);
@@ -15,8 +15,8 @@ function Main() {
 
   return (
     <div className="main-container">
-      <Controls docRef={docRef} file={file} />
-      <Doc docRef={docRef} file={file} />
+      <Controls docRef={docRef} file={file} newFile={newFile} />
+      <Doc docRef={docRef} file={file} newFile={newFile} />
     </div>
   );
 }

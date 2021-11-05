@@ -19,7 +19,7 @@ function App() {
             <Main />
           </Route>
           <Route path="/create">
-            <Main />
+            <Main newFile={true} />
           </Route>
           <Route path="/my-docs">
             <MyDocs />

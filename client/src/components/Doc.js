@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import { useAuth0 } from "@auth0/auth0-react";
 import request from "../helpers/request";
 
-function Doc({ docRef, file = null }) {
+function Doc({ docRef, file = "", newFile }) {
   const {
     user: { email },
   } = useAuth0();
@@ -22,8 +22,13 @@ function Doc({ docRef, file = null }) {
 
   return (
     <div>
-      <div ref={docRef} className="doc" contentEditable="true">
-        {doc?.content && parse(doc.content)}
+      <div
+        ref={docRef}
+        className="doc"
+        contentEditable="true"
+        suppressContentEditableWarning={true}
+      >
+        {newFile ? "" : doc?.content && parse(doc.content)}
       </div>
     </div>
   );
