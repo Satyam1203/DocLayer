@@ -15,7 +15,10 @@ function App() {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route path="/new">
+          <Route path="/create/:file">
+            <Main />
+          </Route>
+          <Route path="/create">
             <Main />
           </Route>
           <Route path="/my-docs">

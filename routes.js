@@ -4,14 +4,26 @@ const Document = require("./models/document");
 router.route("/save").post(async (req, res) => {
   // save to db
   try {
-    const document = await Document.create(req.body);
-    if (document) {
+    const isFileNameDuplicate = await Document.findOne({
+      email: req.body.email,
+      fileName: req.body.fileName,
+    });
+
+    if (isFileNameDuplicate) {
       res.json({
-        success: true,
-        document,
+        success: false,
+        message: "This file name already exists. Please rename.",
       });
     } else {
-      res.json({ success: false });
+      const document = await Document.create(req.body);
+      if (document) {
+        res.json({
+          success: true,
+          document,
+        });
+      } else {
+        res.json({ success: false });
+      }
     }
   } catch (e) {
     res.json({ error: e.message });
@@ -38,14 +50,15 @@ router.route("/find/all").post(async (req, res) => {
 router.route("/find").post(async (req, res) => {
   // find by file name and email
   try {
-    const documents = await Document.findOne({
+    const document = await Document.findOne({
       email: req.body.email,
+      fileName: req.body.fileName,
       active: true,
     });
-    if (documents) {
+    if (document) {
       res.json({
         success: true,
-        documents,
+        document,
       });
     } else {
       res.json({ success: false });
@@ -60,7 +73,7 @@ router.route("/update").post(async (req, res) => {
   try {
     const updated = await Document.updateOne(
       { email: req.body.email, fileName: req.body.fileName },
-      { content: req.body.fileName }
+      { content: req.body.content }
     );
     if (updated.modifiedCount) {
       res.json({

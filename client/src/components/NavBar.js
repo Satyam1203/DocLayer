@@ -6,13 +6,15 @@ function NavBar() {
 
   return (
     <div className="navigation-bar">
-      <h2>Doc Layer</h2>
+      <h2>
+        <Link to="/">Doc Layer</Link>
+      </h2>
       <nav>
         {!isAuthenticated ? (
           <button onClick={loginWithPopup}>Sign-In</button>
         ) : (
           <>
-            <Link to="/new">Create</Link>
+            <Link to="/create">Create</Link>
             <Link to="/my-docs">My Docs</Link>
             <p>{user?.name}</p>
             <button

@@ -2,21 +2,27 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import request from "../helpers/request";
 
-function Controls({ docRef }) {
+function Controls({ docRef, file = null }) {
   const { user } = useAuth0();
-  const [fileName, setFileName] = useState("");
+  const [fileName, setFileName] = useState(file ?? "");
+  const [loading, setLoading] = useState(false);
 
-  const createDoc = async () => {
+  const saveDoc = async () => {
     if (!fileName) {
       alert("Please enter file name");
       return;
     }
-    const res = await request("/api/save", {
+    setLoading(true);
+    const res = await request(`/api/${file ? "update" : "save"}`, {
       fileName,
       content: docRef.current.innerHTML,
       email: user.email,
     });
     console.log(res);
+    if (!res.success) {
+      alert(res.message);
+    }
+    setLoading(false);
     return;
   };
 
@@ -26,8 +32,11 @@ function Controls({ docRef }) {
         type="text"
         value={fileName}
         onChange={(e) => setFileName(e.target.value)}
+        disabled={!!file}
       />
-      <button onClick={createDoc}>Save</button>
+      <button onClick={saveDoc} disabled={loading}>
+        Save
+      </button>
       <button>Delete</button>
     </div>
   );
