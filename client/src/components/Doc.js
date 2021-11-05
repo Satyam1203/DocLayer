@@ -1,7 +1,7 @@
-function Doc() {
+function Doc({ docRef }) {
   return (
     <div>
-      <div className="doc" contentEditable="true"></div>
+      <div ref={docRef} className="doc" contentEditable="true"></div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Main from "./components/Main";
+import MyDocs from "./components/MyDocs";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -14,8 +15,11 @@ function App() {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route path="/doc">
+          <Route path="/new">
             <Main />
+          </Route>
+          <Route path="/my-docs">
+            <MyDocs />
           </Route>
           <Route path="/">
             <header className="App-header">

@@ -12,7 +12,8 @@ function NavBar() {
           <button onClick={loginWithPopup}>Sign-In</button>
         ) : (
           <>
-            <Link to="/doc">Doc</Link>
+            <Link to="/new">Create</Link>
+            <Link to="/my-docs">My Docs</Link>
             <p>{user?.name}</p>
             <button
               onClick={() => logout({ returnTo: window.location.origin })}
