@@ -105,7 +105,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 42px;
+  margin: 42px 0;
   --width: 60vw;
 }
 
@@ -209,7 +209,14 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin: auto;
   padding-top: 24px;
+}
+
+@media screen and (min-width: 481px) {
+  .docs-wrapper {
+    width: 80%;
+  }
 }
 
 .docs-wrapper .doc-card {

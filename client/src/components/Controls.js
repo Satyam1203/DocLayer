@@ -18,6 +18,10 @@ function Controls({ docRef, file = "", newFile }) {
   }, [newFile, file]);
 
   const saveDoc = async () => {
+    if (!user) {
+      alert("Please sign-in to save the document");
+      return;
+    }
     if (!fileName) {
       alert("Please enter file name");
       return;
@@ -62,7 +66,7 @@ function Controls({ docRef, file = "", newFile }) {
     html2pdf()
       .set({
         margin: 8,
-        filename: fileName,
+        filename: fileName || "document.pdf",
         image: { quality: 1 },
         html2canvas: { scale: 1 },
       })
@@ -94,11 +98,9 @@ function Controls({ docRef, file = "", newFile }) {
           </button>
         )}
       </div>
-      {fileExists && (
-        <button className="download-btn" onClick={download}>
-          <i className="fas fa-download"></i>Generate pdf
-        </button>
-      )}
+      <button className="download-btn" onClick={download}>
+        <i className="fas fa-download"></i>Generate pdf
+      </button>
     </div>
   );
 }

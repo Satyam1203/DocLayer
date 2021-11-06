@@ -87,7 +87,7 @@
 
 .main-container {
   display: flex;
-  margin-top: 42px;
+  margin: 42px 0;
   --width: 60vw;
 
   .controls {
@@ -177,7 +177,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: auto;
   padding-top: 24px;
+
+  @media screen and (min-width: 481px) {
+    width: 80%;
+  }
 
   .doc-card {
     position: relative;
