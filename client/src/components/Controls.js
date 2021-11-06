@@ -82,7 +82,7 @@ function Controls({ docRef, file = "", newFile }) {
       />
       <div>
         <button onClick={saveDoc} disabled={loading}>
-          <i className="far fa-save"></i>
+          <i className="far fa-save"></i> Save
         </button>
         {fileExists && (
           <button

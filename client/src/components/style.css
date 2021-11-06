@@ -171,7 +171,7 @@
 
 .main-container .doc {
   width: var(--width);
-  min-height: calc(var(--width) * 1.4142);
+  height: calc(var(--width) * 1.4142);
   overflow-y: scroll;
   background-color: #fff;
   -webkit-box-shadow: 1px 2px 2px 3px grey;

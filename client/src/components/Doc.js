@@ -18,7 +18,7 @@ function Doc({ docRef, file = "", newFile }) {
         setDoc(res.document);
       }
     })();
-  }, [email, file]);
+  }, [email, file, newFile]);
 
   return (
     <div>

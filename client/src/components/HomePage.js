@@ -11,7 +11,7 @@ function HomePage() {
           from any device and download it as pdf. Have fun!
         </p>
         <Link to="/create">
-          Create <i class="fas fa-plus"></i>
+          Create <i className="fas fa-plus"></i>
         </Link>
       </div>
       <div className="image-wrapper">
