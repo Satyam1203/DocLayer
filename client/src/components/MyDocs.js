@@ -1,7 +1,7 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 import parse from "html-react-parser";
 
 import request from "../helpers/request";
@@ -26,14 +26,30 @@ function MyDocs() {
   if (!isAuthenticated) return <Redirect to="/" />;
 
   return (
-    <div>
+    <div className="docs-wrapper">
       {docs?.length > 0 &&
         docs.map((doc, i) => (
-          <div key={i} onClick={() => history.push(`/create/${doc.fileName}`)}>
-            <p>{doc.fileName}</p>
-            <div>{parse(doc.content)}</div>
+          <div className="doc-card" key={i}>
+            <p className="doc-name">{doc.fileName}</p>
+            <div className="doc-content">{parse(doc.content)}</div>
+            <div className="doc-action-buttons">
+              <button onClick={() => history.push(`/create/${doc.fileName}`)}>
+                <i className="far fa-edit"></i>
+              </button>
+              <button onClick={() => {}}>
+                <i className="far fa-trash-alt"></i>
+              </button>
+            </div>
           </div>
         ))}
+      {docs && docs.length === 0 && (
+        <div>
+          <h4>
+            No documents to display. Please start by creating a new one{" "}
+            <Link to="/create">here</Link>
+          </h4>
+        </div>
+      )}
     </div>
   );
 }

@@ -39,10 +39,10 @@ function Controls({ docRef, file = "", newFile }) {
     return;
   };
 
-  const deleteDoc = async () => {
+  const deleteDoc = async (name) => {
     setLoading(true);
     const res = await request(`/api/remove`, {
-      fileName,
+      fileName: name,
       email: user.email,
     });
     console.log(res);
@@ -67,7 +67,7 @@ function Controls({ docRef, file = "", newFile }) {
         Save
       </button>
       {fileExists && (
-        <button onClick={deleteDoc} disabled={loading}>
+        <button onClick={() => deleteDoc(fileName)} disabled={loading}>
           Delete
         </button>
       )}

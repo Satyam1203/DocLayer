@@ -2,14 +2,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: bisque;
   -webkit-box-align: center;
-  -ms-flex-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: bisque;
   align-items: center;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 4px;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 8px;
   /* position: fixed;
   width: 100%;
   top: 0; */
@@ -19,6 +20,54 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 600 !important;
+  position: relative;
+}
+
+.navigation-bar nav .nav-btn {
+  background: transparent;
+  padding: 0;
+  font-size: 1rem;
+  border: none;
+}
+
+.navigation-bar nav .nav-btn:hover {
+  color: #555;
+}
+
+.navigation-bar nav a,
+.navigation-bar nav .profile-options {
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.navigation-bar nav .profile-options img {
+  position: relative;
+  top: 2px;
+}
+
+.navigation-bar nav .profile-options .nav-btn {
+  display: none;
+}
+
+.navigation-bar nav .profile-options:hover .nav-btn {
+  display: inline;
+  position: absolute;
+  top: 35px;
+  right: 6px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  background-color: var(--bg-color);
+}
+
+.navigation-bar nav .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
 .main-container {
@@ -29,8 +78,8 @@
 
 .main-container .controls {
   -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .main-container .doc {
@@ -40,10 +89,79 @@
   aspect-ratio: 1/1.4142;
   background-color: #fff;
   -webkit-box-shadow: 1px 2px 2px 3px grey;
-  box-shadow: 1px 2px 2px 3px grey;
+          box-shadow: 1px 2px 2px 3px grey;
   margin: 4px;
   padding: 16px;
   outline: none;
   text-align: left;
+}
+
+.docs-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 24px;
+}
+
+.docs-wrapper .doc-card {
+  position: relative;
+  width: 280px;
+  background-color: #fff;
+  margin: 12px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.docs-wrapper .doc-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  border-top: 10px solid var(--bg-color);
+  border-right: 10px solid var(--bg-color);
+  border-bottom: 10px solid var(--blue);
+  border-left: 10px solid var(--blue);
+}
+
+.docs-wrapper .doc-card .doc-name {
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid grey;
+}
+
+.docs-wrapper .doc-card .doc-content {
+  display: -webkit-box;
+  height: 175px;
+  padding: 8px 0;
+  color: #444;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.docs-wrapper .doc-card .doc-action-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.docs-wrapper .doc-card .doc-action-buttons .far {
+  font-size: 14px;
+}
+
+.docs-wrapper .doc-card .doc-action-buttons .fa-edit {
+  color: #ffa600;
+}
+
+.docs-wrapper .doc-card .doc-action-buttons .fa-trash-alt {
+  color: #fa4040;
 }
 /*# sourceMappingURL=style.css.map */

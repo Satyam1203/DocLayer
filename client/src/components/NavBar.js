@@ -7,21 +7,26 @@ function NavBar() {
   return (
     <div className="navigation-bar">
       <h2>
-        <Link to="/">Doc Layer</Link>
+        <Link to="/">DocLayer</Link>
       </h2>
       <nav>
         {!isAuthenticated ? (
-          <button onClick={loginWithPopup}>Sign-In</button>
+          <button className="nav-btn" onClick={loginWithPopup}>
+            Sign-In
+          </button>
         ) : (
           <>
             <Link to="/create">Create</Link>
             <Link to="/my-docs">My Docs</Link>
-            <p>{user?.name}</p>
-            <button
-              onClick={() => logout({ returnTo: window.location.origin })}
-            >
-              Logout
-            </button>
+            <div className="profile-options">
+              <img className="avatar" src={user?.picture} alt="profile" />
+              <button
+                className="nav-btn"
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                Logout
+              </button>
+            </div>
           </>
         )}
       </nav>

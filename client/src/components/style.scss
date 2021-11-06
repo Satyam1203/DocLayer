@@ -1,15 +1,66 @@
 .navigation-bar {
   display: flex;
+  align-items: center;
   background-color: bisque;
   align-items: center;
   justify-content: space-between;
-  padding: 4px;
+  padding: 8px;
   /* position: fixed;
   width: 100%;
   top: 0; */
 
   nav {
     display: flex;
+    align-items: center;
+    font-weight: 600 !important;
+    position: relative;
+
+    .nav-btn {
+      background: transparent;
+      padding: 0;
+      font-size: 1rem;
+      border: none;
+
+      &:hover {
+        color: #555;
+      }
+    }
+
+    a,
+    .profile-options {
+      margin: 0 6px;
+      cursor: pointer;
+    }
+
+    .profile-options {
+      img {
+        position: relative;
+        top: 2px;
+      }
+
+      .nav-btn {
+        display: none;
+      }
+
+      &:hover {
+        .nav-btn {
+          display: inline;
+          position: absolute;
+          top: 35px;
+          right: 6px;
+          padding: 10px;
+          border-radius: 4px;
+          border: 1px solid #999;
+          background-color: var(--bg-color);
+        }
+      }
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
   }
 }
 
@@ -31,5 +82,67 @@
     padding: 16px;
     outline: none;
     text-align: left;
+  }
+}
+
+.docs-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 24px;
+
+  .doc-card {
+    position: relative;
+    width: 280px;
+    background-color: #fff;
+    margin: 12px;
+    padding: 12px;
+    border-radius: 8px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      background-color: transparent;
+      border-top: 10px solid var(--bg-color);
+      border-right: 10px solid var(--bg-color);
+      border-bottom: 10px solid var(--blue);
+      border-left: 10px solid var(--blue);
+    }
+
+    .doc-name {
+      font-weight: 600;
+      padding-bottom: 8px;
+      border-bottom: 1px solid grey;
+    }
+
+    .doc-content {
+      display: -webkit-box;
+      height: 175px;
+      padding: 8px 0;
+      color: #444;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .doc-action-buttons {
+      display: flex;
+
+      .far {
+        font-size: 14px;
+      }
+
+      .fa-edit {
+        color: rgb(255, 166, 0);
+      }
+
+      .fa-trash-alt {
+        color: rgb(250, 64, 64);
+      }
+    }
   }
 }
