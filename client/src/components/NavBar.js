@@ -6,8 +6,10 @@ function NavBar() {
 
   return (
     <div className="navigation-bar">
-      <h2>
-        <Link to="/">DocLayer</Link>
+      <h2 className="app-title">
+        <Link to="/">
+          <span style={{ color: "var(--blue)" }}>Doc</span>Layer
+        </Link>
       </h2>
       <nav>
         {!isAuthenticated ? (
