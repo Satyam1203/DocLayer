@@ -33,12 +33,12 @@ function MyDocs() {
             <p className="doc-name">{doc.fileName}</p>
             <div className="doc-content">{parse(doc.content)}</div>
             <div className="doc-action-buttons">
-              <button onClick={() => history.push(`/create/${doc.fileName}`)}>
+              <span onClick={() => history.push(`/create/${doc.fileName}`)}>
                 <i className="far fa-edit"></i>
-              </button>
-              <button onClick={() => {}}>
+              </span>
+              <span onClick={() => {}}>
                 <i className="far fa-trash-alt"></i>
-              </button>
+              </span>
             </div>
           </div>
         ))}

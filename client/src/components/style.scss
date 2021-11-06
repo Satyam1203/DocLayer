@@ -9,6 +9,16 @@
   width: 100%;
   top: 0; */
 
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    nav {
+      width: 100%;
+      height: 40px;
+      justify-content: center;
+      background-color: rgba(255, 245, 230, 0.8);
+    }
+  }
+
   nav {
     display: flex;
     align-items: center;
@@ -66,22 +76,89 @@
 
 .main-container {
   display: flex;
+  margin-top: 42px;
+  --width: 60vw;
 
   .controls {
     flex: 1;
+    padding: 0 12px;
+
+    .input-file-name {
+      display: block;
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: transparent;
+      border: 2px solid rgb(255, 200, 150);
+      border-radius: 50px;
+
+      &:hover {
+        background-color: #fff;
+      }
+
+      &:disabled {
+        background-color: #ddd;
+      }
+
+      &.delete-btn {
+        margin-left: 10px;
+      }
+
+      &.download-btn {
+        display: block;
+        margin-top: 8px;
+
+        .fas {
+          font-size: 16px;
+          margin-right: 6px;
+        }
+      }
+    }
+
+    .far,
+    .fas {
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .fa-save {
+      color: rgb(0, 140, 255);
+    }
+
+    .fa-trash-alt {
+      color: rgb(250, 64, 64);
+    }
+
+    .fa-download {
+      color: rgb(63, 170, 67);
+    }
   }
 
   .doc {
-    width: 60vw;
-    height: calc(60vw * 1.4142);
+    width: var(--width);
+    min-height: calc(var(--width) * 1.4142);
     overflow-y: scroll;
-    aspect-ratio: 1/1.4142;
+    // aspect-ratio: 1/1.4142;
     background-color: #fff;
     box-shadow: 1px 2px 2px 3px grey;
     margin: 4px;
     padding: 16px;
     outline: none;
     text-align: left;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    --width: 80vw;
+
+    .controls {
+      display: grid;
+      justify-items: center;
+    }
   }
 }
 
@@ -116,13 +193,14 @@
     .doc-name {
       font-weight: 600;
       padding-bottom: 8px;
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid var(--thin-blue);
     }
 
     .doc-content {
       display: -webkit-box;
       height: 175px;
       padding: 8px 0;
+      margin-bottom: 8px;
       color: #444;
       -webkit-line-clamp: 8;
       -webkit-box-orient: vertical;
@@ -131,9 +209,17 @@
 
     .doc-action-buttons {
       display: flex;
+      border-top: 1px solid var(--thin-blue);
+      padding-top: 12px;
 
       .far {
-        font-size: 14px;
+        font-size: 18px;
+        cursor: pointer;
+        margin-right: 12px;
+
+        &:hover {
+          opacity: 0.75;
+        }
       }
 
       .fa-edit {

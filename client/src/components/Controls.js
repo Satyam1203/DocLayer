@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
+import html2pdf from "html2pdf.js";
+
 import request from "../helpers/request";
 
 function Controls({ docRef, file = "", newFile }) {
@@ -12,6 +14,7 @@ function Controls({ docRef, file = "", newFile }) {
 
   useEffect(() => {
     setFileName(newFile ? "" : file);
+    setFileExists(!!file);
   }, [newFile, file]);
 
   const saveDoc = async () => {
@@ -55,20 +58,45 @@ function Controls({ docRef, file = "", newFile }) {
     return;
   };
 
+  const download = () => {
+    html2pdf()
+      .set({
+        margin: 8,
+        filename: fileName,
+        image: { quality: 1 },
+        html2canvas: { scale: 1 },
+      })
+      .from(docRef.current)
+      .save();
+  };
+
   return (
     <div className="controls">
       <input
+        className="input-file-name"
         type="text"
         value={fileName}
         onChange={(e) => setFileName(e.target.value)}
-        disabled={!!file}
+        placeholder="Enter file name"
+        disabled={fileExists}
       />
-      <button onClick={saveDoc} disabled={loading}>
-        Save
-      </button>
+      <div>
+        <button onClick={saveDoc} disabled={loading}>
+          <i className="far fa-save"></i>
+        </button>
+        {fileExists && (
+          <button
+            className="delete-btn"
+            onClick={() => deleteDoc(fileName)}
+            disabled={loading}
+          >
+            <i className="far fa-trash-alt"></i>
+          </button>
+        )}
+      </div>
       {fileExists && (
-        <button onClick={() => deleteDoc(fileName)} disabled={loading}>
-          Delete
+        <button className="download-btn" onClick={download}>
+          <i className="fas fa-download"></i>Generate pdf
         </button>
       )}
     </div>
