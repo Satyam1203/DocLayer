@@ -25,6 +25,7 @@ function Doc({ editorState, setEditorState, file = "", newFile }) {
       });
       if (res.success) {
         setInitialContentState(JSON.parse(res.document.content));
+        document.querySelector(".rdw-editor-main").click();
       }
     })();
     //  eslint-disable-next-line
@@ -38,13 +39,13 @@ function Doc({ editorState, setEditorState, file = "", newFile }) {
           width: "100%",
           height: "450px",
           boxShadow: "0 3px 16px 0 rgb(0 0 0 / 11%)",
+          padding: "12px",
           backgroundColor: "#fff",
         }}
         contentState={initialContentState}
         editorState={editorState}
         onEditorStateChange={(s) => {
           setEditorState(s);
-          console.log(s);
         }}
       />
     </div>

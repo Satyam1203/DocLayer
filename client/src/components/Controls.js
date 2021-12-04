@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
-// import html2pdf from "html2pdf.js";
+import draftToHtml from "draftjs-to-html";
+
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import htmlToPdfmake from "html-to-pdfmake";
 
 import { convertToRaw } from "draft-js";
 import request from "../helpers/request";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function Controls({ editorState, file = "", newFile }) {
   const history = useHistory();
@@ -12,6 +18,7 @@ function Controls({ editorState, file = "", newFile }) {
   const [fileName, setFileName] = useState(newFile ? "" : file);
   const [loading, setLoading] = useState(false);
   const [fileExists, setFileExists] = useState(!!file);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setFileName(newFile ? "" : file);
@@ -66,17 +73,28 @@ function Controls({ editorState, file = "", newFile }) {
 
   // implement download
 
-  const download = () => {};
-  //   html2pdf()
-  //     .set({
-  //       margin: 8,
-  //       filename: fileName || "document.pdf",
-  //       image: { quality: 1 },
-  //       html2canvas: { scale: 1 },
-  //     })
-  //     .from(docRef.current)
-  //     .save();
-  // };
+  const download = () => {
+    let download = false;
+    try {
+      let html = htmlToPdfmake(`
+      <div>
+      ${draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+      </div>
+      `);
+      let dd = { content: html };
+      pdfMake.createPdf(dd).download(`${fileName || "document.pdf"}`, () => {
+        download = true;
+        setError("");
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      if (!download)
+        setError(
+          "We currently don't support images, all types of fonts in pdf."
+        );
+    }
+  };
 
   return (
     <div className="controls">
@@ -105,6 +123,7 @@ function Controls({ editorState, file = "", newFile }) {
       <button className="download-btn" onClick={download}>
         <i className="fas fa-download"></i>Generate pdf
       </button>
+      <p style={{ color: "red" }}>{error}</p>
     </div>
   );
 }
