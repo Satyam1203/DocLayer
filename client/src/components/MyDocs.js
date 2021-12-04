@@ -2,10 +2,10 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Redirect, Link, useHistory } from "react-router-dom";
-import parse from "html-react-parser";
 
 import image from "../not_found.svg";
 import request from "../helpers/request";
+import { Editor } from "react-draft-wysiwyg";
 
 function MyDocs() {
   const { isLoading, isAuthenticated, user } = useAuth0();
@@ -52,7 +52,13 @@ function MyDocs() {
         docs.map((doc, i) => (
           <div className="doc-card" key={i}>
             <p className="doc-name">{doc.fileName}</p>
-            <div className="doc-content">{parse(doc.content)}</div>
+            {
+              <Editor
+                editorClassName="doc-content"
+                toolbarHidden
+                initialContentState={JSON.parse(doc.content)}
+              />
+            }
             <div className="doc-action-buttons">
               <span
                 onClick={() => {

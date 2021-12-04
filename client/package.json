@@ -5,11 +5,12 @@
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
     "axios": "^0.24.0",
-    "html-react-parser": "^1.4.0",
+    "draft-js": "^0.11.7",
     "html2pdf.js": "^0.10.1",
     "http-proxy-middleware": "^2.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3"
   },

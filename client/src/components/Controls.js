@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
-import html2pdf from "html2pdf.js";
+// import html2pdf from "html2pdf.js";
 
+import { convertToRaw } from "draft-js";
 import request from "../helpers/request";
 
-function Controls({ docRef, file = "", newFile }) {
+function Controls({ editorState, file = "", newFile }) {
   const history = useHistory();
   const { user } = useAuth0();
   const [fileName, setFileName] = useState(newFile ? "" : file);
@@ -18,6 +19,7 @@ function Controls({ docRef, file = "", newFile }) {
   }, [newFile, file]);
 
   const saveDoc = async () => {
+    const content = convertToRaw(editorState.getCurrentContent());
     if (!user) {
       alert("Please sign-in to save the document");
       return;
@@ -26,14 +28,14 @@ function Controls({ docRef, file = "", newFile }) {
       alert("Please enter file name");
       return;
     }
-    if (!docRef.current.innerHTML) {
+    if (content.blocks.length === 0 && content.blocks[0].text === "") {
       alert("Please enter some text");
       return;
     }
     setLoading(true);
     const res = await request(`/api/${fileExists ? "update" : "save"}`, {
       fileName,
-      content: docRef.current.innerHTML,
+      content: JSON.stringify(content),
       email: user.email,
     });
     console.log(res);
@@ -62,17 +64,19 @@ function Controls({ docRef, file = "", newFile }) {
     return;
   };
 
-  const download = () => {
-    html2pdf()
-      .set({
-        margin: 8,
-        filename: fileName || "document.pdf",
-        image: { quality: 1 },
-        html2canvas: { scale: 1 },
-      })
-      .from(docRef.current)
-      .save();
-  };
+  // implement download
+
+  const download = () => {};
+  //   html2pdf()
+  //     .set({
+  //       margin: 8,
+  //       filename: fileName || "document.pdf",
+  //       image: { quality: 1 },
+  //       html2canvas: { scale: 1 },
+  //     })
+  //     .from(docRef.current)
+  //     .save();
+  // };
 
   return (
     <div className="controls">
