@@ -46,6 +46,8 @@ function MyDocs() {
   if (isLoading) return <div className="text-center">Authenticating...</div>;
   if (!isAuthenticated) return <Redirect to="/" />;
 
+  if (loading) return <div className="text-center">Loading...</div>;
+
   return (
     <div className="docs-wrapper">
       {docs?.length > 0 &&

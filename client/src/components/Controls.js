@@ -91,7 +91,7 @@ function Controls({ editorState, file = "", newFile }) {
     } finally {
       if (!download)
         setError(
-          "We currently don't support images, all types of fonts in pdf."
+          "We currently have some limitations on generating pdfs. We don't support images, all types of fonts."
         );
     }
   };
